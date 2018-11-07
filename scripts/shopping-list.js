@@ -93,10 +93,13 @@ const shoppingList = (function(){
       //   console.log('checking an item');
       //   console.log(checkedStatus);
       // }
-      api.updateItem(id, { checked: !store.findById(id).checked}, store.findAndUpdate(id, { checked: !store.findById(id).checked}));
+      api.updateItem(id, { checked: !store.findById(id).checked}, function(){
+        store.findAndUpdate(id, { checked: !store.findById(id).checked});
+        render();
+      });
       console.log(store.findById(id));
       // store.findAndToggleChecked(id);
-      render();
+      
     });
   }
   
@@ -106,9 +109,12 @@ const shoppingList = (function(){
       // get the index of the item in store.items
       const id = getItemIdFromElement(event.currentTarget);
       // delete the item
-      api.deleteItem(id, store.findAndDelete(id));
+      api.deleteItem(id, function() {
+        store.findAndDelete(id);
+        render();
+      });
       // render the updated shopping list
-      render();
+      
     });
   }
   
@@ -118,10 +124,13 @@ const shoppingList = (function(){
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = { name: $(event.currentTarget).find('.shopping-item').val()};
       console.log(id, itemName);
-      api.updateItem(id, itemName, store.findAndUpdate(id, itemName));
+      api.updateItem(id, itemName, function() {
+        store.findAndUpdate(id, itemName);
+        render();
+      });
       store.setItemIsEditing(id, false);
 
-      render();
+      
     });
   }
   
