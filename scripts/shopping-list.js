@@ -83,13 +83,18 @@ const shoppingList = (function(){
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      let checkedStatus = {};
-      if (store.items.checked){
-        checkedStatus = {checked: !store.items.checked};}
-      else {
-        checkedStatus = {checked: store.items.checked};
-      }
-      api.updateItem(id, checkedStatus, store.findAndUpdate(id, checkedStatus));
+      // let checkedStatus = {};
+      // if (store.items.checked){
+      //   checkedStatus = {checked: false};
+      //   console.log('unchecking an item');
+      //   console.log(checkedStatus);
+      // } else if (!store.items.checked) {
+      //   checkedStatus = {checked: true};
+      //   console.log('checking an item');
+      //   console.log(checkedStatus);
+      // }
+      api.updateItem(id, { checked: !store.findById(id).checked}, store.findAndUpdate(id, { checked: !store.findById(id).checked}));
+      console.log(store.findById(id));
       // store.findAndToggleChecked(id);
       render();
     });
@@ -101,7 +106,7 @@ const shoppingList = (function(){
       // get the index of the item in store.items
       const id = getItemIdFromElement(event.currentTarget);
       // delete the item
-      store.findAndDelete(id);
+      api.deleteItem(id, store.findAndDelete(id));
       // render the updated shopping list
       render();
     });

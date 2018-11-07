@@ -26,6 +26,7 @@ const store = (function(){
     this.items = this.items.filter(item => item.id !== id);
   };
 
+
   // const findAndUpdateName = function(id, name) {
   //   try {
   //     Item.validateName(name);
@@ -53,7 +54,6 @@ const store = (function(){
     items: [],
     hideCheckedItems: false,
     searchTerm: '',
-
     addItem,
     findById,
     // findAndToggleChecked,

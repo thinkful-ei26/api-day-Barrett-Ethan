@@ -15,7 +15,8 @@ const api = (function () {
       method: 'POST',
       contentType: 'application/json',
       data: newItem,
-      success: callback
+      success: callback,
+      error: error => console.error(error.responseJSON.message)
     });
   };
 
@@ -28,12 +29,23 @@ const api = (function () {
       success: callback
     });
   };
+
+  const deleteItem = function(id, callback) {
+    $.ajax({
+      url: `${BASE_URL}/items/${id}`,
+      method: 'DELETE',
+      contentType: 'application/json',
+      // data: JSON.stringify(id),
+      success: callback
+    });
+  };
   
   
 
   return {
     getItems,
     createItem,
-    updateItem
+    updateItem,
+    deleteItem
   };
 }());
