@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 /* global shoppingList, store */
 
 $(document).ready(function() {
@@ -5,4 +6,4 @@ $(document).ready(function() {
   shoppingList.render();
 });
 
-store.items.push(Item.create('apples'));
+
