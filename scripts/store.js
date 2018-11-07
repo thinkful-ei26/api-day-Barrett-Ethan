@@ -50,6 +50,8 @@ const store = (function(){
     this.searchTerm = term;
   };
 
+  
+
   return {
     items: [],
     hideCheckedItems: false,
